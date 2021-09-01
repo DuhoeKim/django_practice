@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>INDEX</h1>
+  <a href={% url 'articles:new' %}>NEW</a>
+  <br>
+  <br>
+  {% for article in articles %}
+    <p> 제목 : {{article.title}} </p>
+    <p> 내용 : {{article.content}} </p>
+    <hr>
+  {% endfor %}
+  <a href="#">DETAIL</a>
+{% endblock content %}
