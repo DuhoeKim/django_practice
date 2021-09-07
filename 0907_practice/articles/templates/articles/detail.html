@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Detail</h1><hr>
+  <h1>글 번호 : {{article.pk}} </h1>
+  <h1>글 제목: {{article.title}} </h1>
+  <p>글 내용: {{article.content}} </p><br>
+  <p>글 생성시각: {{article.created_at}} </p><br>
+  <p>글 수정시각: {{article.updated_at}} </p><br>
+
+  <div class = 'row justify-content-end'>
+    <div class="col-1"> 
+      <a href="{% url 'articles:update' article.pk %}">
+        <button class='btn btn-primary mb-3'>EDIT</button>
+      </a>
+    </div>
+    
+    <form action="{% url 'articles:delete' article.pk %}" method="POST" class='col-1 p-0'>
+      <button class='btn btn-danger '>DELETE</button>
+    </form>
+  </div><hr>
+  <div class='row justify-content-end'>
+    <div class='col-1'>
+      <a href="{% url 'articles:index'%}">
+        <button class='btn btn-primary'>BACK</button>
+      </a>
+    </div>
+  </div>
+
+{% endblock content %}
+

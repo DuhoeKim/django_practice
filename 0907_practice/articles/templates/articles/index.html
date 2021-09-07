@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 class='m-0'>Articles</h1><br>
+  <a href="{% url 'articles:create' %}">
+    <button class = 'btn btn-primary'>NEW</button>
+  </a><hr>
+  {% for article in articles %}
+    <h1 class="mb-3">{{ article.pk }}</h1>
+    <h1 class="mb-3">{{article.title }}</h1>
+    <a href="{% url 'articles:detail' article.pk%}">
+      <button class="btn btn-primary">DETAIL</button>
+    </a>
+    <hr>
+  {% empty %}
+    <h2>게시글이 없습니다.</h2>
+  {% endfor %}
+{% endblock content %}
+
