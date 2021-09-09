@@ -6,7 +6,7 @@ from .forms import ArticleForm
 
 @require_safe
 def index(request):
-    articles = Article.objects.order_by('pk')
+    articles = Article.objects.order_by('-pk')
     context = {
         'articles':articles,
     }
@@ -15,7 +15,7 @@ def index(request):
 @require_http_methods(["GET", "POST"])
 def create(request):
     if request.method == "POST":
-        form = ArticleForm(request.POST)
+        form = ArticleForm(request.POST, request.FILES)
         if form.is_valid():
             article = form.save()
             return redirect('articles:detail', article.pk)
@@ -38,7 +38,7 @@ def detail(request, article_pk):
 def update(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)    
     if request.method == "POST":
-        form = ArticleForm(request.POST, instance=article)
+        form = ArticleForm(request.POST, request.FILES, instance=article)
         if form.is_valid():
             article = form.save()
             return redirect('articles:detail', article.pk)
